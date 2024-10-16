@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'djoser',
+
+    # my app
+    'users',
+    'companies',
 ]
 
 MIDDLEWARE = [
