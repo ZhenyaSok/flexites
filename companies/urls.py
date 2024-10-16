@@ -1,0 +1,12 @@
+from django.urls import path
+from companies.apps import CompaniesConfig
+from companies.views import (CompanyListAPIView, CompanyRetrieveAPIView)
+
+app_name = CompaniesConfig.name
+
+urlpatterns = [
+
+    path('list/', CompanyListAPIView.as_view(), name='list'),
+    path('detail/<int:pk>/', CompanyRetrieveAPIView.as_view(), name='detail'),
+
+]
