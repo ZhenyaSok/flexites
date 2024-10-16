@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'drf_spectacular',
     'phonenumber_field',
     'rest_framework',
     'djoser',
@@ -163,4 +164,12 @@ SIMPLE_JWT = {
     # 'AUTH_HEADER_TYPES': ('Bearer',),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+# DRF SPECTACULAR OPTIONS
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Flex",
+    "DESCRIPTION": "Backend сервер 'тестовое задание Flex'",
+    "VERSION": "1.0.1",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
