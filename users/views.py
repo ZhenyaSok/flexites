@@ -1,19 +1,24 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from users.models import User
+# from users.serializers import UserSerializer
+
+#
+# class UserListAPIView(generics.ListAPIView):
+#     """ list of users """
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
 
 class ActivateUsersView(APIView):
     """
     Представление для активации пользователя по ссылке из письма.
     """
     def get(self, request, uidb64, token, format=None):
-        """
-        Активация пользователя по ссылке из письма.
-        """
+        """Активация пользователя по ссылке из письма."""
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)

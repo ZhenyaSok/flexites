@@ -4,13 +4,12 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
     """
-    Функция создания пользователя — в нее мы передаем обязательные поля
+    Менеджер модели пользователя, где адрес электронной почты является уникальным идентификатором
+    для аутентификации вместо имен пользователей.
     """
 
     def create_user(self, email, first_name, last_name, phone, role="user", password=None):
-        """
-        Создание пользователя
-        """
+        """Создание пользователя"""
         if not email:
             raise ValueError('Users must have an email address')
         user = self.model(
@@ -28,11 +27,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, first_name, last_name, password=None, phone=None):
-        """
-        Функция для создания суперпользователя — с ее помощью мы создаем админинстратора
-        это можно сделать с помощью команды createsuperuser
-        """
-
+        """Функция для создания суперпользователя"""
         user = self.create_user(
             email,
             first_name=first_name,
@@ -40,7 +35,6 @@ class UserManager(BaseUserManager):
             phone=phone,
             password=password,
             role="admin"
-
         )
 
         user.save(using=self._db)

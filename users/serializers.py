@@ -10,7 +10,7 @@ User = get_user_model()
 
 class UserRegistrationSerializer(BaseUserRegistrationSerializer):
     """
-    Регистрация пользователя. (Модель User)
+    Cериализация регистрации пользователя. (Модель User)
     """
     password = serializers.CharField(write_only=True, required=True)
 
