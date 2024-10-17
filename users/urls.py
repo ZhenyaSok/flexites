@@ -18,8 +18,8 @@ app_name = UsersConfig.name
 
 urlpatterns = [
 
-    # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
@@ -28,10 +28,10 @@ urlpatterns = [
 
     # auth/users/ авторизация пользователя
     # auth/users/me/ get,put,patch просмотр, редактирование пользователя (передается: токен, и изменяемые поля)
-    # auth/users/resend_activation/ повторная отправка ссылки на почту для регистрации
     # auth/jwt/create/ создание токенов
     # auth/jwt/refresh/
-    # auth/users/reset_password/ сброс пароля
-    # auth/users/set_password/ изменить пароль
-    # path(r'^auth/', include('djoser.urls')),
+    # auth/users/reset_password/ сброс пароля, на почту приходит письмо со ссылкой
+    # auth/users/reset_password_confirm/  (входные данные, метод POST: uid, token, new_password,  re_new_password)
+    # auth/users/set_password/ изменить пароль,(входные данные, new_password, re_new_password, current_password)
+
 ]

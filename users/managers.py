@@ -3,10 +3,8 @@ from django.contrib.auth.models import (
 )
 
 class UserManager(BaseUserManager):
-    """
-    Менеджер модели пользователя, где адрес электронной почты является уникальным идентификатором
-    для аутентификации вместо имен пользователей.
-    """
+    """Менеджер модели пользователя, где адрес электронной почты является уникальным идентификатором
+    для аутентификации вместо имен пользователей."""
 
     def create_user(self, email, first_name, last_name, phone, role="user", password=None):
         """Создание пользователя"""
@@ -28,6 +26,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, first_name, last_name, password=None, phone=None):
         """Функция для создания суперпользователя"""
+
         user = self.create_user(
             email,
             first_name=first_name,

@@ -2,16 +2,15 @@ from rest_framework import serializers
 
 from companies.models import Company
 from users.models import User
-from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
+from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer, \
+    UserCreatePasswordRetypeSerializer
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class UserRegistrationSerializer(BaseUserRegistrationSerializer):
-    """
-    Cериализация регистрации пользователя. (Модель User)
-    """
+    """Cериализация регистрации пользователя. (Модель User)"""
     password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
@@ -36,3 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'companies']
+
+class CustomUserCreatePasswordRetypeSerializer(UserCreatePasswordRetypeSerializer):
+    """ Сериализация повторной проверки пароля, вводимого пользователем """
+    class Meta(UserCreatePasswordRetypeSerializer.Meta):
+        fields = ('id', 'first_name', 'last_name', 'phone', 'email', 'password')

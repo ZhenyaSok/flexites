@@ -129,34 +129,53 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "django_media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
 
-# Настройки для работы с Djoser
+# Settings Djoser
 DJOSER = {
     'PERMISSIONS': {
         'user_create': ['rest_framework.permissions.AllowAny']
     },
+    # URL-адрес страницы сброса пароля
+    'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}',
+    # Изменение пароля авторизованного пользователя
+    'SET_PASSWORD_RETYPE': True,
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
 
+    # URL-адрес страницы сброса имени пользователя
+    # (в данном случае - электронной почты, как имени пользователя для авторизации)
+    'USERNAME_RESET_CONFIRM_URL': 'api/auth/users/reset_email_confirm/{uid}/{token}',
+    # Изменение имени (в данном случае - электронной почты) авторизованного пользователя
+    'SET_USERNAME_RETYPE': True,
+
+    # URL-адрес страницы активации
+    'ACTIVATION_URL': 'api/activate/{uid}/{token}',
+    # Активация по ссылке, присланной по электронной почте
+    'SEND_ACTIVATION_EMAIL': True,
+    'TOKEN_MODEL': None,  # We use only JWT
+
+    # Проверка равенства паролей
+    'USER_CREATE_PASSWORD_RETYPE': True,
+
+    # сериализаторы
     'SERIALIZERS': {
+        'user': 'users.serializers.UserSerializer',
         'user_create': 'users.serializers.UserRegistrationSerializer',
         'current_user': 'users.serializers.CurrentUserSerializer',
-        'user': 'users.serializers.UserSerializer',
+        'user_create_password_retype': 'users.serializers.CustomUserCreatePasswordRetypeSerializer',
+        'activation': 'djoser.serializers.ActivationSerializer',
+        'password_reset': 'djoser.serializers.SendEmailResetSerializer',
     },
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
-    'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    "LOGOUT_ON_PASSWORD_CHANGE": True,
-    'SET_PASSWORD_RETYPE': True,
-    'USER_CREATE_CONFIRM_RETYPE': True,
-    'TOKEN_MODEL': None,
-    'ACTIVATION_URL': 'api/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'LOGIN_FIELD': 'email',
-    'EMAIL': {
-        'password_reset': 'users.email.PasswordResetEmail',
+    # настройка почты
+    "EMAIL": {
+        "activation": "users.email.UserActivationEmail",
+        "confirmation": "users.email.UserConfirmationEmail",
+        "password_reset": "users.email.UserPasswordResetEmail",
+        "password_changed_confirmation": "users.email.UserPasswordChangedConfirmationEmail",
+        "username_changed_confirmation": "users.email.UserUsernameChangedConfirmationEmail",
+        "username_reset": "users.email.UserUsernameResetEmail",
     },
+    # Имя поля в модели пользователя, которое будет использоваться в качестве поля входа.
+    'LOGIN_FIELD': 'email'
 }
 
 # REST_FRAMEWORK OPTIONS
