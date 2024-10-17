@@ -1,4 +1,4 @@
-====ТЕСТОВОЕ ЗАДАНИЕ:====
+
 
 # API-приложение (REST)
 
@@ -34,20 +34,20 @@ DRF-YASG 1.21.7, Djoser 2.2.2.
 Письма при авторизации (активации), изменении электронной почты, пароля, сбросе, восстановлении пароля приходит 
 на указанную почту с соответствующими ссылками. 
 
-# auth/users/ POST авторизация пользователя, 
+- auth/users/ POST авторизация пользователя, 
 необходимо заполнить поля: "first_name","last_name", "phone", "email","password","re_password",
 на почту приходит письмо со ссылкой, после активации ссылки, пользователь становится зарегестрированным
 (view для данного эндпоинта реализовано дополнительно)
-# auth/users/me/ get,put,patch просмотр, редактирование пользователя 
+- auth/users/me/ get,put,patch просмотр, редактирование пользователя 
 (передается: токен, и изменяемые поля)
-# auth/jwt/create/ создание токенов
-# auth/jwt/refresh/
-# auth/users/reset_password/ сброс пароля, 
+- auth/jwt/create/ создание токенов
+- auth/jwt/refresh/
+- auth/users/reset_password/ сброс пароля, 
 на почту приходит письмо со ссылкой, далее из ссылки на фронте вытягиваются токен и uid, 
 и вместе с данными пользователя "new_password","re_new_password" передаются на бэкенд
 в POST - запросе по следующему эндпоинту (ниже)
-# auth/users/reset_password_confirm/  (входные данные, метод POST: uid, token, new_password,  re_new_password)
-# auth/users/set_password/ изменить пароль,(входные данные, new_password, re_new_password, current_password)
+- auth/users/reset_password_confirm/  (входные данные, метод POST: uid, token, new_password,  re_new_password)
+- auth/users/set_password/ изменить пароль,(входные данные, new_password, re_new_password, current_password)
 
 Для запуска проекта следуйте инструкциям:
 ### **Установка**
@@ -91,4 +91,4 @@ http://127.0.0.1:8000/api/schema/swagger-ui/>
 http://127.0.0.1:8000/api/schema/redoc/>
 
 
-====КОНЕЦ====
+
