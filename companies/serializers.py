@@ -8,7 +8,7 @@ class CompanySerializer(serializers.ModelSerializer):
     list_users = serializers.SerializerMethodField()
 
     def get_list_users(self, company):
-        """Метод выводит все уроки в курсе"""
+        """Метод выводит всеx пользователей относящихся к компании"""
         return [f"{user.first_name} {user.last_name}" for user in User.objects.filter(companies=company)]
     class Meta:
         model = Company
