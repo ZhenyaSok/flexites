@@ -169,8 +169,6 @@ DJOSER = {
     "EMAIL": {
         "confirmation": "users.email.UserConfirmationEmail",
         "password_reset": "users.email.UserPasswordResetEmail",
-        "password_changed_confirmation": "users.email.UserPasswordChangedConfirmationEmail",
-        "username_changed_confirmation": "users.email.UserUsernameChangedConfirmationEmail",
     },
     # Имя поля в модели пользователя, которое будет использоваться в качестве поля входа.
     'LOGIN_FIELD': 'email'
