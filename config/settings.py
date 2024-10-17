@@ -167,12 +167,10 @@ DJOSER = {
     },
     # настройка почты
     "EMAIL": {
-        "activation": "users.email.UserActivationEmail",
         "confirmation": "users.email.UserConfirmationEmail",
         "password_reset": "users.email.UserPasswordResetEmail",
         "password_changed_confirmation": "users.email.UserPasswordChangedConfirmationEmail",
         "username_changed_confirmation": "users.email.UserUsernameChangedConfirmationEmail",
-        "username_reset": "users.email.UserUsernameResetEmail",
     },
     # Имя поля в модели пользователя, которое будет использоваться в качестве поля входа.
     'LOGIN_FIELD': 'email'
