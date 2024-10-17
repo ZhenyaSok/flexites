@@ -5,6 +5,7 @@ from django.test import TestCase
 class UsersManagersTests(TestCase):
 
     def test_create_user(self):
+        '''Тест для создания обычного пользователя'''
         User = get_user_model()
         user = User.objects.create_user(email="normal@user.ru", password="123qwe456asd", phone="+78525556363",
                                         first_name='Test1', last_name='Test_1ast')
@@ -26,6 +27,7 @@ class UsersManagersTests(TestCase):
                                         first_name='Test1', last_name='Test_1ast')
 
     def test_create_superuser(self):
+        """Тест на создание суперпользователя"""
         User = get_user_model()
         admin_user = User.objects.create_superuser(email="super@user.ru",
                                                    first_name='Test', last_name='Test_last')
