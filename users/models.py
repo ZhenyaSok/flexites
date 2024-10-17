@@ -4,7 +4,7 @@ from .managers import UserManager
 from companies.models import Company
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
-
+from django_resized import ResizedImageField
 
 NULLABLE = {"null": True, "blank": True}
 
@@ -22,7 +22,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=50, verbose_name='Имя', **NULLABLE)
     last_name = models.CharField(max_length=75, verbose_name='Фамилия', **NULLABLE)
     phone = PhoneNumberField(region='KZ', **NULLABLE)
-    image = models.ImageField(upload_to='user/', verbose_name='Фото', **NULLABLE)
+    image = ResizedImageField(size=[200, 200], upload_to='avatars', **NULLABLE) # уменьшение картинки
     companies = models.ManyToManyField(Company, verbose_name='Список организаций', **NULLABLE)
     role = models.CharField(max_length=5, choices=UserRoles.choices, default='user', verbose_name='статус пользователя')
     is_active = models.BooleanField(default=True)
