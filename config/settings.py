@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'djoser',
+    "rest_framework_simplejwt",
 
     # my app
     'users',
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.flex',
     }
 }
 
@@ -104,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -127,6 +128,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "django_media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+
 # Настройки для работы с Djoser
 DJOSER = {
     'PERMISSIONS': {
@@ -135,11 +141,13 @@ DJOSER = {
 
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserRegistrationSerializer',
-        'current_user': 'users.serializers.CurrentUserSerializer'
+        'current_user': 'users.serializers.CurrentUserSerializer',
+        'user': 'users.serializers.UserSerializer',
     },
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    "LOGOUT_ON_PASSWORD_CHANGE": True,
     'SET_PASSWORD_RETYPE': True,
     'USER_CREATE_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
@@ -173,3 +181,13 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.1",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+# Настройки почты, для отправки яндекс
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
