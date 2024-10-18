@@ -9,7 +9,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users.views import ActivateUsersView
+from users.views import ActivateUsersView, ResetPasswordUsersView
 
 users_router = SimpleRouter()
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
 
     path('activate/<uidb64>/<token>/', ActivateUsersView.as_view(), name='activate_user'), # активация с почты по ссылке
+    path('reset_password_confirm/{uid}/{token}/', ResetPasswordUsersView.as_view(), name='reset_password_confirm')
 
     # auth/users/ авторизация пользователя
     # auth/users/me/ get,put,patch просмотр, редактирование пользователя (передается: токен, и изменяемые поля)
